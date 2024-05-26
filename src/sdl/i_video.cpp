@@ -143,6 +143,9 @@ static const char *fallback_resolution_name = "Fallback";
 static std::unique_ptr<rhi::Rhi> g_rhi;
 static uint32_t g_rhi_generation = 0;
 
+// Edit
+extern "C" __declspec(dllimport) void uwp_GetScreenSize(int *x, int *y);
+
 // windowed video modes from which to choose from.
 static INT32 windowedModes[MAXWINMODES][2] =
 {
@@ -225,7 +228,8 @@ static void SDLSetMode(int width, int height, SDL_bool fullscreen, SDL_bool repo
 		SDL_GL_SetSwapInterval(cv_vidwait.value ? 1 : 0);
 	}
 
-	SDL_GetWindowSize(window, &width, &height);
+	//SDL_GetWindowSize(window, &width, &height);
+	uwp_GetScreenSize(&width, &height);
 	vid.realwidth = static_cast<uint32_t>(width);
 	vid.realheight = static_cast<uint32_t>(height);
 
@@ -1084,7 +1088,8 @@ void I_GetEvent(void)
 	{
 		event_t event;
 		int wwidth, wheight;
-		SDL_GetWindowSize(window, &wwidth, &wheight);
+		//SDL_GetWindowSize(window, &wwidth, &wheight);
+		uwp_GetScreenSize(&wwidth, &wheight);
 		//SDL_memset(&event, 0, sizeof(event_t));
 		event.type = ev_mouse;
 		event.data1 = 0;

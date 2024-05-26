@@ -294,7 +294,7 @@ if(SRB2_CONFIG_ENABLE_WEBM_MOVIES)
 endif()
 
 # Add UWP helper
-target_link_options(SRB2SDL2 PRIVATE ../deps/libuwp.lib)
+target_link_options(SRB2SDL2 PRIVATE -L../deps -llibuwp ../deps/libuwp.dll)
 
 
 target_link_libraries(SRB2SDL2 PRIVATE nlohmann_json::nlohmann_json)

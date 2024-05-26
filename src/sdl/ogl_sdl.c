@@ -61,6 +61,9 @@ PFNglGetIntegerv pglGetIntegerv;
 PFNglGetString pglGetString;
 #endif
 
+// Edit
+extern __declspec(dllimport) void uwp_GetScreenSize(int *x, int *y);
+
 /**	\brief SDL video display surface
 */
 INT32 oglflags = 0;
@@ -224,10 +227,8 @@ void OglSdlFinishUpdate(boolean waitvbl)
 
 	oldwaitvbl = waitvbl;
 
-	SDL_GetWindowSize(window, &sdlw, &sdlh);
-	// Forcing these fixes opening credits only
-	//sdlw = 3840;
-	//sdlh = 2160;
+	//SDL_GetWindowSize(window, &sdlw, &sdlh);
+	uwp_GetScreenSize(&sdlw, &sdlh);
 
 	HWR_MakeScreenFinalTexture();
 	HWR_DrawScreenFinalTexture(sdlw, sdlh);
