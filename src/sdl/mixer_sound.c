@@ -190,8 +190,9 @@ void I_StartupSound(void)
 	//I_Assert(!sound_started);
 	if (sound_started)
 		return;
-
-#ifdef _WIN32
+#ifndef UWP_TODO
+	SDL_setenv("SDL_AUDIODRIVER", "wasapi", 1);
+#elif _WIN32
 	// Force DirectSound instead of WASAPI
 	// SDL 2.0.6+ defaults to the latter and it screws up our sound effects
 	SDL_setenv("SDL_AUDIODRIVER", "directsound", 1);

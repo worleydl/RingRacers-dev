@@ -2275,6 +2275,9 @@ void D_SRB2Main(void)
 
 const char *D_Home(void)
 {
+#ifndef UWP_TODO
+	return "E:\\ringracers";
+#endif
 	const char *userhome = NULL;
 
 #ifdef ANDROID

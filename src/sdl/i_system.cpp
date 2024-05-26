@@ -287,15 +287,15 @@ static void I_ShowErrorMessageBox(const char *messagefordevelopers, boolean dump
 	snprintf(
 		finalmessage,
 		sizeof(finalmessage),
-			"Hee Ho!\n"
+			"Hee Ho! %s %s\n"
 			"\n"
-			"\"Dr. Robotnik's Ring Racers\" has encountered an unrecoverable error and needs to close.\n"
-			"This is (usually) not your fault, but we encourage you to report it in the community. This should be done alongside your "
-			"%s"
-			"log file (%s).\n"
-			"\n"
-			"The following information is for a programmer (please be nice to them!) but\n"
-			"may also be useful for server hosts and add-on creators.\n"
+			//"\"Dr. Robotnik's Ring Racers\" has encountered an unrecoverable error and needs to close.\n"
+			//"This is (usually) not your fault, but we encourage you to report it in the community. This should be done alongside your "
+			//"%s"
+			//"log file (%s).\n"
+			//"\n"
+			//"The following information is for a programmer (please be nice to them!) but\n"
+			//"may also be useful for server hosts and add-on creators.\n"
 			"\n"
 			"%s",
 		dumpmade ?
@@ -574,6 +574,7 @@ static void I_ShutdownConsole(void)
 
 static void I_StartupConsole(void)
 {
+#ifdef UWP_TODO
 	struct termios tc;
 
 	// TTimo
@@ -618,6 +619,7 @@ static void I_StartupConsole(void)
 	tc.c_cc[VMIN] = 0; //1?
 	tc.c_cc[VTIME] = 0;
 	tcsetattr (0, TCSADRAIN, &tc);
+#endif
 }
 
 void I_GetConsoleEvents(void)
@@ -1990,6 +1992,7 @@ void I_GetDiskFreeSpace(INT64 *freespace)
 #endif
 }
 
+#ifdef UWP_TODO
 char *I_GetUserName(void)
 {
 	static char username[MAXPLAYERNAME+1];
@@ -2025,6 +2028,7 @@ char *I_GetUserName(void)
 		return username;
 	return NULL; // dummy for platform independent version
 }
+#endif
 
 INT32 I_mkdir(const char *dirname, INT32 unixright)
 {
@@ -2173,6 +2177,9 @@ static const char *locateWad(void)
 {
 	const char *envstr;
 	const char *WadPath;
+#ifndef UWP_TODO
+	return "E:\\ringracers";
+#endif
 
 	I_OutputMsg("RINGRACERSWADDIR");
 	// does RINGRACERSWADDIR exist?

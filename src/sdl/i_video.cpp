@@ -103,7 +103,7 @@ static INT32 numVidModes = -1;
 */
 static char vidModeName[33][32]; // allow 33 different modes
 
-rendermode_t rendermode = render_soft;
+rendermode_t rendermode = render_opengl;
 rendermode_t chosenrendermode = render_none; // set by command line arguments
 
 UINT8 graphics_started = 0; // Is used in console.c and screen.c

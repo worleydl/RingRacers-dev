@@ -98,7 +98,7 @@ add_subdirectory(thirdparty)
 
 find_package(ZLIB REQUIRED)
 find_package(PNG REQUIRED)
-find_package(SDL2 CONFIG REQUIRED)
+find_package(SDL2 REQUIRED)
 find_package(CURL REQUIRED)
 # Use the one in thirdparty/fmt to guarantee a minimum version
 #find_package(FMT CONFIG REQUIRED)
@@ -174,11 +174,11 @@ if(NOT "${SRB2_GIT_DIR}" STREQUAL "" AND "${SRB2_SDL2_EXE_NAME}" STREQUAL "")
 
 	list(APPEND EXE_NAME_PARTS "ringracers")
 
-	if(NOT "${SRB2_GIT_REVISION}" STREQUAL "master")
-		# substitute path-unsafe characters
-		string(REGEX REPLACE "[\\\/\^\$]" "_" SAFE_REVISION "${SRB2_GIT_REVISION}")
-		list(APPEND EXE_NAME_PARTS ${SAFE_REVISION})
-	endif()
+	#if(NOT "${SRB2_GIT_REVISION}" STREQUAL "master")
+	#	# substitute path-unsafe characters
+	#	string(REGEX REPLACE "[\\\/\^\$]" "_" SAFE_REVISION "${SRB2_GIT_REVISION}")
+	#	list(APPEND EXE_NAME_PARTS ${SAFE_REVISION})
+	#endif()
 
 	if (SRB2_CONFIG_TESTERS)
 		list(APPEND EXE_NAME_PARTS "TESTERS")

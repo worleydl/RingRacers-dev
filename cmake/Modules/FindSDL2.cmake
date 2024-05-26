@@ -13,6 +13,7 @@ libfind_pkg_check_modules(SDL2_PKGCONF SDL2)
 find_path(SDL2_INCLUDE_DIR
 	NAMES SDL.h
 	PATHS
+		"C:/dev/hdr/SDL-uwp-gl/include"
 		${SDL2_PKGCONF_INCLUDE_DIRS}
 		"/usr/include/SDL2"
 		"/usr/local/include/SDL2"
@@ -22,6 +23,9 @@ find_path(SDL2_INCLUDE_DIR
 find_library(SDL2_LIBRARY
 	NAMES SDL2
 	PATHS
+		"C:/dev/hdr/SDL-uwp-gl/VisualC-WinRT/x64/Release/SDL-UWP"
+		"C:/dev/hdr/SDL-uwp-gl/VisualC-WinRT/x64/Debug/SDL-UWP"
+		${SDL2_PKGCONF_LIBRARY_DIRS}
 		${SDL2_PKGCONF_LIBRARY_DIRS}
 		"/usr/lib"
 		"/usr/local/lib"

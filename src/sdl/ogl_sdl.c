@@ -225,6 +225,9 @@ void OglSdlFinishUpdate(boolean waitvbl)
 	oldwaitvbl = waitvbl;
 
 	SDL_GetWindowSize(window, &sdlw, &sdlh);
+	// Forcing these fixes opening credits only
+	//sdlw = 3840;
+	//sdlh = 2160;
 
 	HWR_MakeScreenFinalTexture();
 	HWR_DrawScreenFinalTexture(sdlw, sdlh);
