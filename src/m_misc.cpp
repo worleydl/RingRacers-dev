@@ -1060,7 +1060,7 @@ static inline boolean M_PNGLib(void)
 #ifdef PNG_STATIC // Win32 build have static libpng
 	return true;
 #else
-	static void *pnglib = NULL;
+	static HMODULE pnglib = NULL;
 	if (aPNG_set_acTL && aPNG_write_frame_head && aPNG_write_frame_tail)
 		return true;
 	if (pnglib)
@@ -1086,9 +1086,9 @@ static inline boolean M_PNGLib(void)
 	aPNG_write_frame_tail = (P_png_write_frame_tail) hwSym("png_write_frame_tail", pnglib);
 #endif
 #ifdef _WIN32
-	aPNG_set_acTL = (P_png_set_acTL) GetProcAddress("png_set_acTL", pnglib);
-	aPNG_write_frame_head = (P_png_write_frame_head) GetProcAddress("png_write_frame_head", pnglib);
-	aPNG_write_frame_tail = (P_png_write_frame_tail) GetProcAddress("png_write_frame_tail", pnglib);
+	aPNG_set_acTL = (P_png_set_acTL) GetProcAddress(pnglib, "png_set_acTL");
+	aPNG_write_frame_head = (P_png_write_frame_head) GetProcAddress(pnglib, "png_write_frame_head");
+	aPNG_write_frame_tail = (P_png_write_frame_tail) GetProcAddress(pnglib, "png_write_frame_tail");
 #endif
 	return (aPNG_set_acTL && aPNG_write_frame_head && aPNG_write_frame_tail);
 #endif

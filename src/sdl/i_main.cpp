@@ -47,6 +47,7 @@ extern "C" {
 //#define SDLMAIN
 #endif
 
+#define SDLMAIN 1
 #ifdef SDLMAIN
 #include "SDL_main.h"
 #elif defined(FORCESDLMAIN)
@@ -296,7 +297,7 @@ int main(int argc, char **argv)
 
 	//I_OutputMsg("I_StartupSystem() ...\n");
 	I_StartupSystem();
-#if defined (_WIN32)
+#if defined (_WIN32) and DISABLE_EXCH_FOR_UWP
 	if (!M_CheckParm("-noexchndl"))
 	{
 #if 0 // just load the DLL

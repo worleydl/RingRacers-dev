@@ -1,4 +1,5 @@
-add_executable(SRB2SDL2 MACOSX_BUNDLE WIN32
+set(CMAKE_WINDOWS_EXPORT_ALL_SYMBOLS ON)
+add_library(SRB2SDL2 SHARED WIN32
 	comptime.c
 	cxxutil.hpp
 	md5.c
