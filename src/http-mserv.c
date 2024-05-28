@@ -38,6 +38,9 @@ Documentation available here.
 
 #define HMS_QUERY_VERSION "?v=2.2"
 
+// TODO: need to setup headerfile
+extern __declspec(dllimport) void uwp_GetBundleFilePath(char *buffer, const char *file);
+
 #ifdef MASTERSERVER
 
 static int hms_started;
@@ -203,6 +206,11 @@ HMS_connect (const char *format, ...)
 	curl_easy_setopt(curl, CURLOPT_TIMEOUT, cv_masterserver_timeout.value);
 	curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, HMS_on_read);
 	curl_easy_setopt(curl, CURLOPT_WRITEDATA, buffer);
+
+	// Setup SSL cert path for UWP
+	char cert_path_buffer[1024];
+	uwp_GetBundleFilePath(cert_path_buffer, "certs\\cacert.pem");
+	curl_easy_setopt(curl, CURLOPT_CAINFO, cert_path_buffer);
 
 	curl_free(quack_token);
 	free(url);
