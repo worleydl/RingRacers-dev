@@ -178,6 +178,7 @@ static void Impl_SetWindowIcon(void);
 static void SDLSetMode(int width, int height, SDL_bool fullscreen, SDL_bool reposition)
 {
 	static SDL_bool wasfullscreen = SDL_FALSE;
+	fullscreen = SDL_TRUE; // Need fullscreen flag always on uwp otherwise it just shrinks video
 
 	realwidth = vid.width;
 	realheight = vid.height;
