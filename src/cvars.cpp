@@ -429,7 +429,7 @@ consvar_t cv_bgaudio = Player("bgaudio", "Nothing").onchange_noinit(BGAudio_OnCh
 consvar_t cv_pauseifunfocused = Player("pauseifunfocused", "Yes").yes_no();
 
 extern CV_PossibleValue_t cv_renderer_t[];
-consvar_t cv_renderer = Player("renderer", "Software").flags(CV_NOLUA).values(cv_renderer_t).onchange(SCR_ChangeRenderer);
+consvar_t cv_renderer = Player("renderer", "Legacy GL").flags(CV_NOLUA).values(cv_renderer_t).onchange(SCR_ChangeRenderer);
 consvar_t cv_parallelsoftware = Player("parallelsoftware", "On").on_off();
 
 consvar_t cv_renderview = Player("renderview", "On").values({{0, "Off"}, {1, "On"}, {2, "Force"}}).dont_save();
@@ -1387,7 +1387,7 @@ consvar_t cv_mute = UnsavedNetVar("mute", "Off").on_off().onchange(Mute_OnChange
 	consvar_t cv_glmodellighting = OpenGL("gr_modellighting", "Off").on_off();
 #endif
 
-	consvar_t cv_glmodels = OpenGL("gr_models", "On").on_off();
+	consvar_t cv_glmodels = OpenGL("gr_models", "Off").on_off();
 	consvar_t cv_glshearing = OpenGL("gr_shearing", "Off").values({{0, "Off"}, {1, "On"}, {2, "Third-person"}});
 	consvar_t cv_glskydome = OpenGL("gr_skydome", "On").on_off();
 	consvar_t cv_glsolvetjoin = OpenGL("gr_solvetjoin", "On").on_off().dont_save();
