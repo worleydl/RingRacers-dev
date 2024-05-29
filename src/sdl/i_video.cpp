@@ -103,7 +103,7 @@ static INT32 numVidModes = -1;
 */
 static char vidModeName[33][32]; // allow 33 different modes
 
-rendermode_t rendermode = render_opengl;
+rendermode_t rendermode = render_soft;
 rendermode_t chosenrendermode = render_none; // set by command line arguments
 
 UINT8 graphics_started = 0; // Is used in console.c and screen.c
@@ -143,8 +143,9 @@ static const char *fallback_resolution_name = "Fallback";
 static std::unique_ptr<rhi::Rhi> g_rhi;
 static uint32_t g_rhi_generation = 0;
 
-// Edit
+// TODO: Fix header file
 extern "C" __declspec(dllimport) void uwp_GetScreenSize(int *x, int *y);
+extern "C" __declspec(dllimport) float uwp_GetRefreshRate();
 
 // windowed video modes from which to choose from.
 static INT32 windowedModes[MAXWINMODES][2] =
@@ -211,7 +212,9 @@ static void SDLSetMode(int width, int height, SDL_bool fullscreen, SDL_bool repo
 		Impl_CreateWindow(fullscreen);
 		wasfullscreen = fullscreen;
 		SDL_SetWindowSize(window, width, height);
+#ifdef UWP_TODO
 		if (fullscreen)
+#endif
 		{
 			SDL_SetWindowFullscreen(window, SDL_WINDOW_FULLSCREEN_DESKTOP);
 		}
@@ -1497,6 +1500,7 @@ boolean VID_CheckRenderer(void)
 static UINT32 refresh_rate;
 static UINT32 VID_GetRefreshRate(void)
 {
+#ifdef UWP_TODO
 	int index = SDL_GetWindowDisplayIndex(window);
 	SDL_DisplayMode m;
 
@@ -1513,6 +1517,9 @@ static UINT32 VID_GetRefreshRate(void)
 	}
 
 	return m.refresh_rate;
+#else
+	return uwp_GetRefreshRate();
+#endif
 }
 
 INT32 VID_SetMode(INT32 modeNum)

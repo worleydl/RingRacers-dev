@@ -103,6 +103,7 @@
 #include "lua_profile.h"
 
 extern "C" consvar_t cv_lua_profile, cv_menuframeskip;
+extern "C" float uwp_GetRefreshRate();
 
 /* Manually defined asset hashes
  */
@@ -900,7 +901,7 @@ void D_SRB2Loop(void)
 
 		{
 			// Casting the return value of a function is bad practice (apparently)
-			double budget = round((1.0 / R_GetFramerateCap()) * I_GetPrecisePrecision());
+			double budget = round((1.0 / uwp_GetRefreshRate()) * I_GetPrecisePrecision());
 			capbudget = (precise_t) budget;
 		}
 
